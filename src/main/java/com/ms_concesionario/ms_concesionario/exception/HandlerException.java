@@ -16,8 +16,10 @@ import java.util.List;
 public class HandlerException {
 
     @ExceptionHandler(CarNotFoundException.class)
-    public ResponseEntity<?> handleCarNotFound(CarNotFoundException ex){
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<MessageException> handleCarNotFound(CarNotFoundException ex){
+        MessageException message = new MessageException();
+        message.setMessage(ex.getMessage());
+        return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
